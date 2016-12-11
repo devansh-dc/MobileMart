@@ -1,20 +1,25 @@
 package mobilemart.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-
+import javax.validation.constraints.Min;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity 
 public class Product implements Serializable {
 	@Id@GeneratedValue
 	private int id;
+	@NotEmpty(message="Name cannot be left blank")
 	private String name;
+	@Min(1)
 	private int price;
 	private String category;
+	@NotEmpty(message="Description cannot be left blank")
 	private  String description;
 	
 	@Transient
