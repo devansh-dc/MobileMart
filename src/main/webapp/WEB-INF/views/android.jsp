@@ -14,37 +14,22 @@
 body {
 	background-image: url("resources/images/back.jpg");
 }
-
-#myInput {
-	background-image: url("resources/searchicon.png");
-	/* Add a search icon to input */
-	background-position: 10px 12px; /* Position the search icon */
-	background-repeat: no-repeat; /* Do not repeat the icon image */
-	width: 100%; /* Full-width */
-	font-size: 16px; /* Increase font-size */
-	padding: 12px 20px 12px 40px; /* Add some padding */
-	border: 1px solid #ddd; /* Add a grey border */
-	margin-bottom: 12px; /* Add some space below the input */
-}
-
 .jumbotron
 {
 background-image: url("resources/images/images (1).jpg");
 }
 </style>
-<title>All products</title>
+<title>ANDROID PHONES</title>
 </head>
 <body>
 	<%@include file="header.jsp"%>
 	<div class="container">
 
 		<div class="jumbotron">
-			<h2>ALL PRODUCTS</h2>
-			<input type="text" id="myInput" onkeyup="myFunction()"
-				placeholder="Search for product id.."> 
-			<div class="container">
+			<h2>ANDROID PHONES</h2>
+				<div class="container">
 				<div class="row">
-				<c:forEach var="p" items="${productList}">
+					<c:forEach var="p" items="${productList}">
 						<div class="col-sm-4">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
@@ -81,27 +66,6 @@ background-image: url("resources/images/images (1).jpg");
 			</div>
 		</div>
 	</div>
-
-	<script>
-		function myFunction() {
-			var input, filter, table, tr, td, i;
-			input = document.getElementById("myInput");
-			filter = input.value.toUpperCase();
-			table = document.getElementById("myTable");
-			tr = table.getElementsByTagName("tr");
-			for (i = 0; i < tr.length; i++) {
-				td = tr[i].getElementsByTagName("td")[0];
-				if (td) {
-					if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-						tr[i].style.display = "";
-					} else {
-						tr[i].style.display = "none";
-					}
-				}
-			}
-		}
-	</script>
-
 
 	<%@include file="footer.jsp"%>
 </body>

@@ -14,4 +14,5 @@ public interface ProductDao {
 	
 	void deleteProduct(Product p);
 
+	ArrayList<Product> getAndroid();
 }

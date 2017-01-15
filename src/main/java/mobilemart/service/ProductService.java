@@ -32,4 +32,7 @@ public class ProductService {
 	public void deleteProduct(Product p){
 		dao.deleteProduct(p);
 	}
+	public ArrayList<Product> getAndroid() {
+		return dao.getAndroid();
+	}
 }

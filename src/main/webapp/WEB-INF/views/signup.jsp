@@ -1,3 +1,4 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
 <style>
@@ -10,6 +11,19 @@ body {
 	background-image: url("resources/images/images (1).jpg");
 }
 </style>
+<script type="text/javascript">
+	$(function() {
+		$("register").click(function() {
+			var password = $("password").val();
+			var confirmPassword = $("password_confirm").val();
+			if (password != confirmPassword) {
+				alert("Passwords do not match.");
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
 <title>Sign up</title>
 </head>
 <body>
@@ -20,7 +34,7 @@ body {
 			<div class="row">
 				<div class="col-md-12">
 
-					<form class="form-horizontal" action="" method="POST">
+					<form class="form-horizontal" action="register" method="POST">
 						<fieldset>
 							<div id="legend">
 								<legend class="">Register</legend>
@@ -32,7 +46,7 @@ body {
 										class="form-control input-lg" type="text">
 									<p class="help-block">Username can contain any letters or
 										numbers, without spaces</p>
-								</div>
+										</div>
 							</div>
 
 							<div class="control-group">
@@ -61,13 +75,14 @@ body {
 									<input id="password_confirm" name="password_confirm"
 										placeholder="" class="form-control input-lg" type="password">
 									<p class="help-block">Please confirm password</p>
+
 								</div>
 							</div>
 
 							<div class="control-group">
 								<!-- Button -->
 								<div class="controls">
-									<button class="btn btn-success">Register</button>
+									<button name="register" class="btn btn-success">Register</button>
 								</div>
 							</div>
 						</fieldset>

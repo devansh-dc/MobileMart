@@ -48,4 +48,9 @@ public class ProductDaoImpl implements ProductDao {
 		session.delete(p);
 	}
 
+	public ArrayList<Product> getAndroid() {
+		Session session = sessionFactory.getCurrentSession();
+        String hql="FROM Product P WHERE P.category='ANDROID' ORDER BY P.price ";
+		return (ArrayList<Product>) session.createQuery(hql).list();
+	}
 }

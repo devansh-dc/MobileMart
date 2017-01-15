@@ -16,12 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import mobilemart.model.Product;
+import mobilemart.model.Role;
+import mobilemart.model.User;
 import mobilemart.service.ProductService;
+import mobilemart.service.RoleService;
+import mobilemart.service.UserService;
 
 @Controller
 public class AppController {
 	@Autowired
 	ProductService pservice;
+	@Autowired
+	UserService uservice;
+	@Autowired
+	RoleService rservice;
 
 	@Autowired
 	ServletContext context;
@@ -34,12 +42,33 @@ public class AppController {
 
 	@RequestMapping("/login")
 	public String showLogin() {
-		return "login";
+		return "loginPage";
 	}
 
 	@RequestMapping("/signup")
-	public String showSignup() {
-		return "signup";
+	public ModelAndView showSignup() {
+		return new ModelAndView("signup", "user", new User());
+	}
+
+	@RequestMapping("/register")
+	public String register(@Valid @ModelAttribute("user") User u, BindingResult result) {
+		// --------validation check----------
+		if (result.hasErrors()) {
+			System.out.println("adding a blog has errors");
+			return "signup";
+		} 
+		else {
+			// add a user by calling user service
+			Role r = new Role();
+			String us;
+			us = u.getUsername();
+			r.setUsername(us);
+			r.setRolename("USER");
+			u.setEnabled(true);
+			uservice.addUser(u);
+			rservice.addRole(r);
+			return "index";
+		}
 	}
 
 	@RequestMapping("/contactus")
@@ -128,5 +157,12 @@ public class AppController {
 		Product p = pservice.getProduct(Integer.parseInt(id));
 		pservice.deleteProduct(p);
 		return new ModelAndView("allproducts", "product", p);
+	}
+
+	@RequestMapping("/android")
+	public String showAndroidproducts(Model model) {
+		ArrayList<Product> plist = pservice.getAndroid();
+		model.addAttribute("productList", plist);
+		return "android";
 	}
 }
