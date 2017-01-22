@@ -32,8 +32,11 @@
 				<li class="active"><a href="index">Home</a></li>
 				<li><a href="aboutus">About Us</a></li>
 				<li><a href="contactus">Contact Us</a></li>
+				<c:if test="${pageContext.request.userPrincipal.name=='admin'}">
 				<li><a href="allproducts">All Products</a></li>
 				<li><a href="addproduct">Add a product</a></li>
+				</c:if>
+			<c:if test="${pageContext.request.userPrincipal.name!='admin'}">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Mobile Phones <span
 						class="caret"></span></a>
@@ -42,6 +45,7 @@
 						<li><a href="#">Ubuntu</a></li>
 						<li><a href="#">Ios</a></li>
 					</ul></li>
+					</c:if>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
